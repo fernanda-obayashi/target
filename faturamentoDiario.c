@@ -3,7 +3,7 @@
 #include "cJSON.h"
 
 #define MAX_DIAS 31
-
+//3
 int main() {
     int faturamento_diario[MAX_DIAS];
     int num_dias = 0;
@@ -13,12 +13,12 @@ int main() {
     int num_dias_acima_media = 0;
     float media_mensal;
 
-    // Inicializa menor e maior valor com um valor muito grande e muito pequeno, respectivamente
+    // Inicializa menor e maior valor
     menor_valor = 1000000000;
     maior_valor = -1000000000;
 
     // Lê os dados do arquivo JSON e armazena no vetor
-    FILE *arquivo = fopen("faturamento.json", "r");
+    FILE *arquivo = fopen("dados.json", "r");
     if (arquivo == NULL) {
         printf("Erro ao abrir arquivo\n");
         exit(1);
@@ -41,14 +41,14 @@ int main() {
         exit(1);
     }
 
-    cJSON *faturamento = cJSON_GetObjectItem(root, "faturamento");
-    if (faturamento == NULL) {
+    cJSON *dados = cJSON_GetObjectItem(root, "dados");
+    if (dados == NULL) {
         printf("Erro ao obter dados de faturamento\n");
         exit(1);
     }
 
     cJSON *dia = NULL;
-    cJSON_ArrayForEach(dia, faturamento) {
+    cJSON_ArrayForEach(dia, dados) {
         int valor = cJSON_GetObjectItem(dia, "valor")->valueint;
         faturamento_diario[num_dias] = valor;
         num_dias++;
